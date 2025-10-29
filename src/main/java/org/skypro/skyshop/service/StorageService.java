@@ -15,10 +15,12 @@ import java.util.*;
 public class StorageService {
     private final Map<UUID, Product> uuidProductMap;
     private final Map<UUID, Article> uuidArticleMap;
+    private final Map<UUID, Product> availableProduct;
 
-    public StorageService(Map<UUID, Product> uuidProductMap, Map<UUID, Article> uuidArticleMap) {
+    public StorageService(Map<UUID, Product> uuidProductMap, Map<UUID, Article> uuidArticleMap, Map<UUID, Product> availableProduct) {
         this.uuidProductMap = new HashMap<>();
         this.uuidArticleMap = new HashMap<>();
+        this.availableProduct = new HashMap<>();
         getTestMap();
 
     }
@@ -31,6 +33,10 @@ public class StorageService {
         return uuidArticleMap.values();
     }
 
+    public Optional<Product> getProductById(UUID id) {
+        return Optional.ofNullable(availableProduct.get(id));
+    }
+
     private void getTestMap() {
         ProductBasket productBasket = new ProductBasket();
         Product product1 = new SimpleProduct("Хлеб", 30, UUID.randomUUID());
@@ -38,11 +44,11 @@ public class StorageService {
         Product product3 = new DiscountedProduct("Колбаса", 12, 15, UUID.randomUUID());
         Product product4 = new FixPriceProduct("Сыр", UUID.randomUUID());
         Product product5 = new FixPriceProduct("Шампиньоны", UUID.randomUUID());
-        productBasket.addProduct(product1,product1.getId());
-        productBasket.addProduct(product2,product2.getId());
-        productBasket.addProduct(product3,product3.getId());
-        productBasket.addProduct(product4,product4.getId());
-        productBasket.addProduct(product5,product5.getId());
+        productBasket.addProduct(product1.getId());
+        productBasket.addProduct(product2.getId());
+        productBasket.addProduct(product3.getId());
+        productBasket.addProduct(product4.getId());
+        productBasket.addProduct(product5.getId());
 
         SearchEngine engine = new SearchEngine();
         Article article1 = new Article("Сыр", "Благородные сыры", UUID.randomUUID());
