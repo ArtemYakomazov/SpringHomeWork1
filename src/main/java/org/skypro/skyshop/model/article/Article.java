@@ -6,9 +6,9 @@ import org.skypro.skyshop.model.search.Searchable;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Article implements Searchable {
-    String title;
-    String text;
+public final class Article implements Searchable {
+    private final String title;
+    private final String text;
     private final UUID id;
 
     public Article(String title, String text, UUID id) {
