@@ -28,36 +28,33 @@ public class StorageService {
     public Collection<Product> getAllProducts() {
         return uuidProductMap.values();
     }
-
     public Collection<Article> getAllArticles() {
         return uuidArticleMap.values();
     }
-
     public Optional<Product> getProductById(UUID id) {
         return Optional.ofNullable(availableProduct.get(id));
     }
 
     private void getTestMap() {
-        ProductBasket productBasket = new ProductBasket();
         Product product1 = new SimpleProduct("Хлеб", 30, UUID.randomUUID());
         Product product2 = new DiscountedProduct("Молоко", 60, 12, UUID.randomUUID());
         Product product3 = new DiscountedProduct("Колбаса", 12, 15, UUID.randomUUID());
         Product product4 = new FixPriceProduct("Сыр", UUID.randomUUID());
         Product product5 = new FixPriceProduct("Шампиньоны", UUID.randomUUID());
-        productBasket.addProduct(product1.getId());
-        productBasket.addProduct(product2.getId());
-        productBasket.addProduct(product3.getId());
-        productBasket.addProduct(product4.getId());
-        productBasket.addProduct(product5.getId());
+        uuidProductMap.put(product1.getId(), product1);
+        uuidProductMap.put(product2.getId(), product2);
+        uuidProductMap.put(product3.getId(), product3);
+        uuidProductMap.put(product4.getId(), product4);
+        uuidProductMap.put(product5.getId(), product5);
 
-        SearchEngine engine = new SearchEngine();
+
         Article article1 = new Article("Сыр", "Благородные сыры", UUID.randomUUID());
         Article article2 = new Article("Хлеб", "Производство хлеба", UUID.randomUUID());
         Article article3 = new Article("Колбаски", "Колбасные нарезки", UUID.randomUUID());
         Article article4 = new Article("Шампиньоны", "Выращивание шампиньонов", UUID.randomUUID());
-        engine.add(article1,article1.getId());
-        engine.add(article2,article2.getId());
-        engine.add(article3,article3.getId());
-        engine.add(article4,article4.getId());
+        uuidArticleMap.put(article1.getId(),article1);
+        uuidArticleMap.put(article2.getId(),article2);
+        uuidArticleMap.put(article3.getId(),article3);
+        uuidArticleMap.put(article4.getId(),article4);
     }
 }

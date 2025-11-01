@@ -1,6 +1,8 @@
 package org.skypro.skyshop.service;
 
+import org.skypro.skyshop.model.busket.BasketItem;
 import org.skypro.skyshop.model.busket.ProductBasket;
+import org.skypro.skyshop.model.busket.UserBasket;
 import org.skypro.skyshop.model.product.Product;
 import org.springframework.stereotype.Service;
 
