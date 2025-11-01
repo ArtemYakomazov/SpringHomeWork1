@@ -15,7 +15,7 @@ public class ProductBasket {
     }
 
     public void addProduct(UUID id) {
-        products.put(id, products.get(id));
+        products.put(id, products.getOrDefault(id, 0) + 1);
     }
 
     public Map<UUID, Integer> getProducts() {
