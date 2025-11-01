@@ -1,12 +1,10 @@
 package org.skypro.skyshop.service;
 
 import org.skypro.skyshop.model.article.Article;
-import org.skypro.skyshop.model.busket.ProductBasket;
 import org.skypro.skyshop.model.product.Product;
 import org.skypro.skyshop.model.product.discounted.DiscountedProduct;
 import org.skypro.skyshop.model.product.fixprice.FixPriceProduct;
 import org.skypro.skyshop.model.product.simple.SimpleProduct;
-import org.skypro.skyshop.model.search.SearchEngine;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -15,12 +13,10 @@ import java.util.*;
 public class StorageService {
     private final Map<UUID, Product> uuidProductMap;
     private final Map<UUID, Article> uuidArticleMap;
-    private final Map<UUID, Product> availableProduct;
 
-    public StorageService(Map<UUID, Product> uuidProductMap, Map<UUID, Article> uuidArticleMap, Map<UUID, Product> availableProduct) {
+    public StorageService() {
         this.uuidProductMap = new HashMap<>();
         this.uuidArticleMap = new HashMap<>();
-        this.availableProduct = new HashMap<>();
         getTestMap();
 
     }
@@ -32,7 +28,7 @@ public class StorageService {
         return uuidArticleMap.values();
     }
     public Optional<Product> getProductById(UUID id) {
-        return Optional.ofNullable(availableProduct.get(id));
+        return Optional.ofNullable(uuidProductMap.get(id));
     }
 
     private void getTestMap() {
@@ -52,9 +48,6 @@ public class StorageService {
         Article article2 = new Article("Хлеб", "Производство хлеба", UUID.randomUUID());
         Article article3 = new Article("Колбаски", "Колбасные нарезки", UUID.randomUUID());
         Article article4 = new Article("Шампиньоны", "Выращивание шампиньонов", UUID.randomUUID());
-        uuidArticleMap.put(article1.getId(),article1);
-        uuidArticleMap.put(article2.getId(),article2);
-        uuidArticleMap.put(article3.getId(),article3);
-        uuidArticleMap.put(article4.getId(),article4);
+
     }
 }
