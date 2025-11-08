@@ -4,7 +4,10 @@ import org.skypro.skyshop.model.busket.BasketItem;
 import org.skypro.skyshop.model.busket.ProductBasket;
 import org.skypro.skyshop.model.busket.UserBasket;
 import org.skypro.skyshop.model.product.Product;
+import org.skypro.skyshop.exeptions.NoSuchProductException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
 
 import java.util.*;
@@ -24,7 +27,7 @@ public class BasketService {
     public void addProductToBasket(UUID id) {
         Optional<Product> productOptional = storageService.getProductById(id);
         if (!productOptional.isPresent()) {
-            throw new IllegalArgumentException("Товар с таким ID не найден.");
+            throw new NoSuchProductException();
         }
         productBasket.addProduct(id);
     }
@@ -36,7 +39,7 @@ public class BasketService {
                 .stream()
                 .map(m -> new BasketItem(storageService
                                 .getProductById(m.getKey())
-                                .orElseThrow(() -> new IllegalArgumentException("Продукт не найден по id: " + m.getKey())), m.getValue()))
+                                .orElseThrow(NoSuchProductException::new), m.getValue()))
                 .collect(Collectors.toCollection(ArrayList::new));
 
         double total = basketItems.stream()
